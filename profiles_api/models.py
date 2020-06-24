@@ -52,6 +52,7 @@ class UserProfile(AbstractBaseUser, PermissionsMixin):
     # objects will hold user's manager profile
     objects = UserProfileManager()
 
+    # http://127.0.0.1:8000/api/Login/ will use email for Username
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 

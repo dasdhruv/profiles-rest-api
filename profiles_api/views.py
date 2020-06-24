@@ -12,7 +12,11 @@ from profiles_api import models
 # request. And thats effectively a password to check the evry request made is authenticating correctly.
 from rest_framework.authentication import TokenAuthentication
 from profiles_api import permissions
+# To add the search functionality
 from rest_framework import filters
+# To generate token each time user loggs in to our system
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.settings import api_settings
 
 
 class HelloApiView(APIView):
@@ -94,6 +98,11 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = (permissions.UpdateOwnProfile,)
 
 	# Let us add a search filter so that user can search a profile by their name or email
-    # Make sure that you should not change the variable names 
+    # Make sure that you should not change the variable names
 	filter_backends = (filters.SearchFilter,)
 	search_fields = ('name','email')
+
+#http://127.0.0.1:8000/api/Login/
+class UserLoginApiView(ObtainAuthToken):
+   """Handle creating user authentication tokens"""
+   renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
