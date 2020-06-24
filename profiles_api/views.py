@@ -12,6 +12,7 @@ from profiles_api import models
 # request. And thats effectively a password to check the evry request made is authenticating correctly.
 from rest_framework.authentication import TokenAuthentication
 from profiles_api import permissions
+from rest_framework import filters
 
 
 class HelloApiView(APIView):
@@ -91,3 +92,8 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 	# instead of just a single item
 	authentication_classes = (TokenAuthentication,)
 	permission_classes = (permissions.UpdateOwnProfile,)
+
+	# Let us add a search filter so that user can search a profile by their name or email
+    # Make sure that you should not change the variable names 
+	filter_backends = (filters.SearchFilter,)
+	search_fields = ('name','email')
