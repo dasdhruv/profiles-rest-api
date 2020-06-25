@@ -17,6 +17,8 @@ from rest_framework import filters
 # To generate token each time user loggs in to our system
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.settings import api_settings
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+#from rest_framework.permissions import IsAuthenticated
 
 
 class HelloApiView(APIView):
@@ -98,11 +100,33 @@ class UserProfileViewSet(viewsets.ModelViewSet):
 	permission_classes = (permissions.UpdateOwnProfile,)
 
 	# Let us add a search filter so that user can search a profile by their name or email
-    # Make sure that you should not change the variable names
+	# Make sure that you should not change the variable names
 	filter_backends = (filters.SearchFilter,)
 	search_fields = ('name','email')
 
+
+
 #http://127.0.0.1:8000/api/Login/
 class UserLoginApiView(ObtainAuthToken):
-   """Handle creating user authentication tokens"""
-   renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+	"""Handle creating user authentication tokens"""
+	renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
+
+
+
+
+
+class ProfileFeedModelsViewSet(viewsets.ModelViewSet):
+
+	serializer_class = serializers.ProfileFeedModelsSerializer
+	# The Django rest_framework knows the standard functions that you wanna perform on a model viewset
+	queryset = models.ProfileFeedModels.objects.all()
+
+	permission_classes = (permissions.UpdateOwnStatus, IsAuthenticatedOrReadOnly)
+	#permission_classes = (permissions.UpdateOwnStatus, IsAuthenticated)
+
+	# The perform_create functions is a handy functions provided by django rest_framework
+	# it allows you to override the behaviour or customize the behaviour.
+	# It allows you to create objects through a model viewsets
+	# this is called everytime when we request HTTP post
+	def perform_create(this, serializer):
+		serializer.save(user_profile=this.request.user)

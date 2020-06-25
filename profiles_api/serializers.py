@@ -14,8 +14,18 @@ class UserProfileSerializer(serializers.ModelSerializer):
                                     {'write_only':True, 'style':{'input_type':'password'}
                                     }
                           }
-        print("I am in Meta class")
+        
 
     def create(this, validated_data):
         user = models.UserProfile.objects.create_user(email = validated_data['email'], name = validated_data['name'], password = validated_data['password'])
         return user
+
+
+class ProfileFeedModelsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProfileFeedModels
+        fields = ('id','user_profile','status_text', 'created_on')
+        extra_kwargs = {'user_profile':
+                                    {'read_only':True
+                                    }
+                          }

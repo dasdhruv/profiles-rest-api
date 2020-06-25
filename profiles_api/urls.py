@@ -9,6 +9,8 @@ router.register("Hello-ViewSet", views.HelloViewSets, base_name = "Hello-ViewSet
 # Let us register our create and update profile ViewSet
 # unlike the Hello-ViewSet we dont need to specify the base_name as we have queryset in our UserProfileViewSets
 router.register("profile", views.UserProfileViewSet)
+router.register("feed", views.ProfileFeedModelsViewSet)
+
 
 urlpatterns = [
     # as_view is the standard function that we call to convert our api view's class HelloApiView rended by the URLs
