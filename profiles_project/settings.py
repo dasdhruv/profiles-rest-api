@@ -27,10 +27,10 @@ SECRET_KEY = '#u7u3vwqrl$8i3=aq2xttvq#7+m&#*1xf3g-6@f=)j(o8y)8kd'
 # make debug false because it will reveal our code information to the User
 DEBUG = bool(int(os.environ.get('DEBUG',1)))
 
-# When we run python manage.py collectstatic script, django wants a location to store the files it generates 
+# When we run python manage.py collectstatic script, django wants a location to store the files it generates
 STATIC_ROOT = 'static/'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http://ec2-3-12-111-41.us-east-2.compute.amazonaws.com/','127.0.0.1']
 
 
 # Application definition
