@@ -30,7 +30,7 @@ DEBUG = bool(int(os.environ.get('DEBUG',1)))
 # When we run python manage.py collectstatic script, django wants a location to store the files it generates
 STATIC_ROOT = 'static/'
 
-ALLOWED_HOSTS = ['http://ec2-3-12-111-41.us-east-2.compute.amazonaws.com/','127.0.0.1']
+ALLOWED_HOSTS = ['ec2-3-12-111-41.us-east-2.compute.amazonaws.com','127.0.0.1']
 
 
 # Application definition
