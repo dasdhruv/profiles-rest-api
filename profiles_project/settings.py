@@ -23,7 +23,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '#u7u3vwqrl$8i3=aq2xttvq#7+m&#*1xf3g-6@f=)j(o8y)8kd'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+# make debug false because it will reveal our code information to the User
+DEBUG = bool(int(os.environ.get('DEBUG',1)))
+
+# When we run python manage.py collectstatic script, django wants a location to store the files it generates 
+STATIC_ROOT = 'static/'
 
 ALLOWED_HOSTS = []
 
